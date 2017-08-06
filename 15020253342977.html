@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  买的第一套刀具——网易严选厨刀六件套 - 
+  MacOS系统里用SourceTree添加局域网Git仓库 - 
   
   </title>
   
@@ -103,14 +103,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>买的第一套刀具——网易严选厨刀六件套</h1>
+          <h1>MacOS系统里用SourceTree添加局域网Git仓库</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2017/2/23</span>
+          <span class="date">2017/8/6</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Review.html'>Review</a></span>
+              <span class="posted-in"><a href='Tech.html'>Tech</a></span>
            
          
           <span class="comments">
@@ -123,48 +123,66 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>最近刚好搬了新家，也终于有了属于自己的大厨房，于是乎开始购置各种厨具满足自己爱下厨的嗜好（伪）。在张大妈上看了很多关于厨刀的文章，越看越是迷糊，不知道怎么买比较好，刚好最近网易严选有不少促销活动，逛了一下发现网易严选有一套价格不错的厨刀六件套可以下手，看了下评价好像也不错的样子，于是乎就干脆先买一套入门的刀具来先用用，等以后技术精进了再做打算。</p>
+      <p>最近公司给新项目配置了一个Git仓库来进行管理，其中也给产品团队开设了一个仓库路径来存放各种文档资料。对于Git仓库，以前自己也用过，不过一直都是使用的Github仓库，直接使用SourceTree软件来进行管理，配置过程还是比较简单的，网上也有不少教程。但是使用的是局域网环境下的Git仓库，管理员直接提供了仓库地址和每个人员的SSH秘钥。对于这种方式，以前在WIN系统下操作时还算简单，WIN版的SourceTree里带有SSH秘钥工具可以直接将发来的SSH秘钥添加进去，而Mac版的SourceTree则没有相应的功能。</p>
+
+<p>在配置局域网Git仓库时，如果是直接添加仓库git地址是，SourceTree会提示「这是一个无效源路径/URL」，这个错误在clone一些线上git仓库时也可能会有提示，一般这种提示基本都是缺少相应的SSH私钥，所以需要在本地添加上这个私钥。查找了一些资料再结合自己配置github仓库时的经验，对这个ssh秘钥设置有了个大概的了解，最终将局域网git仓库配置成功。</p>
 
 <span id="more"></span><!-- more -->
 
-<p>刀具到手了用了几天感觉还是比较不错，挺趁手的，赶紧来和值友分享下，看看大家对这套厨刀的评价，毕竟这是我的第一套厨刀，也不知道这套刀是不是真的很值。</p>
+<p>首先通过添加github仓库来了解整个ssh秘钥流程，SourceTree添加github账户时可以直接通过OAuth方式添加，如果选择SSH协议时，此时界面上SSH秘钥一项会提示「未找到秘钥」。<br/>
+<img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020129077625.jpg" alt=""/></p>
 
-<p>买了不少网易严选的东西，还是非常喜欢严选的风格、包装，非常的简约，而且配送速度也不错。这套厨刀是6件套，外包装上直接就标识了是怎么样的刀具，同时还附带了一个实木刀座。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-002.jpg" alt="网易厨刀-002"/><br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-003.jpg" alt="网易厨刀-003"/></p>
+<p>这个时候直接点击创建秘钥，SourceTree就会在本地创建SSH秘钥，此时可以进入到<code>/Users/youname/.ssh/</code>文件夹下查看,SourceTree已经生成了相应的公钥<code>.pub</code>和私钥，还有<code>config</code><code>known_host</code>两个文件。如果此时功能正常的话，SourceTree会立即将生成的公钥上传到github账户，如果上传失败可以直接复制相应的公钥然后到github账户中添加，这样就能clone自己github账号里的项目了。<br/>
+<img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020148002927.jpg" alt=""/><br/>
+<img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020145142324.jpg" alt=""/><br/>
+<img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020146882193.jpg" alt=""/></p>
 
-<p>拆开包装，刀具和刀座是分开装配的。刀座的品质看上去还不错。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-004.jpg" alt="网易厨刀-004"/><br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-005.jpg" alt="网易厨刀-005"/></p>
+<p>配置了github账号后，整个ssh秘钥配置过程差不多就了解个大概了。在局域网使用git时，管理员发来的私钥也要通过这个类似过程来添加，公钥已经配置到服务器了。既然是私钥，所以需要直接将发来的key文件放到<code>.ssh</code>文件夹里，文件名可以随意。因为一般添加的git仓库多了，<code>.ssh</code>文件夹下一般会有好几个私钥文件，所以为了能让SourceTree正确选择相应的私钥文件，此时就需要对刚才生成的<code>config</code>文件进行配置。打开刚才配置好github后的<code>config</code>文件看看默认的格式。<br/>
+<img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020156714334.jpg" alt=""/></p>
 
-<p>每一把刀都是独立包装的，刀刃部分都是有多重保护。刀柄是不锈钢的，整体看上去很爽的。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-006.jpg" alt="网易厨刀-006"/><br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-007.jpg" alt="网易厨刀-007"/></p>
+<pre><code># --- SourceTree Generated ---
+Host xxxx-GitHub
+    HostName github.com
+    User xxxx
+    PreferredAuthentications publickey
+    IdentityFile /Users/xxxx/.ssh/xxxx-GitHub
+    UseKeychain yes
+    AddKeysToAgent yes
+# ----------------------------
+</code></pre>
 
-<p>每一把刀上都打有材质的标记，标记也非常清晰没有毛糙的感觉。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-008.jpg" alt="网易厨刀-008"/><br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-009.jpg" alt="网易厨刀-009"/></p>
+<p>看了这个config文件是通过指定相应host地址来使用对应的私钥文件，所以还需要看一下文件夹里的<code>known_hosts</code>文件里是怎么配置的。<br/>
+<img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020162229469.jpg" alt=""/><br/>
+看来格式大概就是<code>域名,IP 加密方式 公钥</code>的格式，其实这个hosts文件并不需要特别修改，在操作添加git仓库时，提示无效源地址时会在里面添加上相应的host配置，我们只需要拿到域名就行了，这样就能开始进行配置了，可能部分信息还需要向git仓库管理员要。接下来就要开始配置config文件了，直接参考上面github的配置写就可以。</p>
 
-<p>摸了下刀刃的部分，感觉还是挺锋利的，开刃的工艺也很不错，非常均匀光亮。不锈钢的刀柄和刀体的连接也非常平滑光洁，浑然一体的感觉。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-010.jpg" alt="网易厨刀-010"/><br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-011.jpg" alt="网易厨刀-011"/></p>
+<pre><code>Host 名称 #可以填域名，方便自己识别
+    HostName git仓库域名
+    User 用户名
+    IdentityFile 私钥路径
+    PreferredAuthentications publickey
+</code></pre>
 
-<p>对比了下中式菜刀和斩骨刀的厚度，每把刀在重量上没有看上去那么重，还是比较轻盈的感觉。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-013.jpg" alt="网易厨刀-013"/></p>
+<p><img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020202302641.jpg" alt=""/></p>
 
-<p>厨师刀和水果刀拿起来也比较舒服，切起来也比较舒服比较稳，刃口还是非常锋利的，稍微在桌面上磕了一下就把桌面磕了一个小坑。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-014.jpg" alt="网易厨刀-014"/></p>
+<p>按照这样配置好config文件后，可以先尝试一下是否能够添加git仓库了，如果此时仍然提示无效源地址的话，就需要在终端里检测一下，输入以下命令看看仓库的地址有没有配置上对应的私钥key。</p>
 
-<p>还有一把剪刀，带有锁扣平时可以锁起来，这个剪刀稍微用了下感觉不锈钢的手柄稍微有点滑，但是手柄的弧度非常舒服，很贴合。刃口还可以，就是剪一些稍微薄一点的东西的时候会不好剪。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-015.jpg" alt="网易厨刀-015"/><br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-016.jpg" alt="网易厨刀-016"/></p>
+<pre><code>ssh -T git@github.com #对应git仓库地址
+</code></pre>
 
-<p>整套刀具装起来摆在厨房里还是不怎么占位置的，之所以买这套刀具就是看好配套的刀座，如果自己单独买刀的话，还要自己再买一个放刀的底座，感觉太麻烦了。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-017.jpg" alt="网易厨刀-017"/><br/>
-后来又用了几次水果刀，感觉这把水果刀在削皮的不是很好用，感觉稍微偏大了一点，切水果还是比较方便的。这套毕竟是自己的第一套刀具，对于我这样一个下厨用刀经验不是很多的人来说，初步的使用体验还是非常不错。<br/>
-最后顺便晒晒一同时购入的另外两个不错的东西，一个是严选的米缸一个是淘米盆。<br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-001.jpg" alt="网易厨刀-001"/><br/>
-<img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-02-23-%E7%BD%91%E6%98%93%E5%8E%A8%E5%88%80-018.jpg" alt="网易厨刀-018"/></p>
+<p>如果提示如下，就表示已经配置上了。</p>
+
+<pre><code>ssh -T git@github.com
+Hi xxxx! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+
+<p>如果此时返回的结果是一个警告提示的话，则表示我们复制到<code>.ssh</code>文件夹中的key权限上面有问题。<br/>
+<img src="http://7xqd0g.com1.z0.glb.clouddn.com/15020248138908.jpg" alt=""/></p>
+
+<p>此时就需要我们对key文件的权限进行修改，修改之后就可以正常连接到git仓库了。</p>
+
+<pre><code>cd ~/.ssh
+chmod 700 xxxx
+</code></pre>
 
 
     
@@ -175,16 +193,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="14878598589162.html" 
-          title="Previous Post: Vaping is the future —— 电子烟入坑之路">&laquo; Vaping is the future —— 电子烟入坑之路</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="14713596483338.html" 
-          title="Next Post: 小牛N1半年长测">小牛N1半年长测 &raquo;</a>
+          <a  href="14978867181728.html" 
+          title="Next Post: 小巧且颇具颜值的路由器——荣耀X1增强版">小巧且颇具颜值的路由器——荣耀X1增强版 &raquo;</a>
       
       </p>
         </div>
