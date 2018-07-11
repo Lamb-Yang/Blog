@@ -50,7 +50,7 @@
 
         <ul class="right" id="search-wrap">
           <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
     <input type="hidden" id="search_q" name="q" value="" />
     <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
 </form>
@@ -70,10 +70,13 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-       
-       <li><a href="index.html">HOME</a></li>
-    <li><a href="archives.html">Archives</a></li>
-    <li><a href="about.html">ABOUT</a></li>
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="about.html">about</a></li>
+        
 
     <li><label>Categories</label></li>
 
@@ -170,11 +173,12 @@
 <img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-07-03-mac_mini_ssd-012.jpg" alt="mac_mini_ssd-012"/><br/>
 <img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-07-03-mac_mini_ssd-013.jpg" alt="mac_mini_ssd-013"/></p>
 
-<p>换好SSD之后就一步步逆序还原回去就行了，然后通电开机，瞬间就觉得macmini重生了，以前要等个一两分钟的开机，现在只需要十多二十秒就进去了。启动各种app也是瞬间打开。然后还有最后一步操作就是，开启第三方SSD的trim，直接在终端里输入以下命令即可。<br/>
-<code><br/>
-sudo trimforce enable<br/>
-</code><br/>
-安全起见的话，可以备份一下后再开启。最后到系统里查看一下有没有真的开启trim模式就可以了。<br/>
+<p>换好SSD之后就一步步逆序还原回去就行了，然后通电开机，瞬间就觉得macmini重生了，以前要等个一两分钟的开机，现在只需要十多二十秒就进去了。启动各种app也是瞬间打开。然后还有最后一步操作就是，开启第三方SSD的trim，直接在终端里输入以下命令即可。</p>
+
+<pre class="line-numbers"><code class="language-text">sudo trimforce enable
+</code></pre>
+
+<p>安全起见的话，可以备份一下后再开启。最后到系统里查看一下有没有真的开启trim模式就可以了。<br/>
 <img src="http://7xqd0g.com1.z0.glb.clouddn.com/2017-07-03-mac_mini_ssd-001.jpg" alt="mac_mini_ssd-001"/></p>
 
 <p>到此为止，macmini升级就完成了，新的2014版macmini最多也就只能升级一下硬盘，内存什么的都是焊死的，虽然换的ssd容量不是很大，但拆出来的机械硬盘就可以当做一个移动硬盘来用了。同时为了能在win和mac系统下通用移动硬盘的话，最好拿到win系统下格式化成exfat的格式，这样两边系统就都能识别了。</p>
@@ -272,6 +276,12 @@ sudo trimforce enable<br/>
 	      
 		      
 			      <li class="post">
+			        <a href="15312770578474.html">能以手环价格买到的GPS运动手表——埃微P1一周体验</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15026421285568.html">小牛N1复活记——如何彻底修复00错误</a>
 			      </li>
 		     
@@ -295,10 +305,6 @@ sudo trimforce enable<br/>
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="14952848108441.html">搞不好是限量版键盘——酷冷烈焰枪87v2红轴键盘上手</a>
-			      </li>
-		     
 		  
 		      
 		  
