@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  爬取网贷天眼的P2P问题平台数据 - Lamb_Yang羊圈
+  信仰充值入手PS4 slim主机 - Lamb_Yang羊圈
   
   </title>
   
@@ -106,14 +106,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>爬取网贷天眼的P2P问题平台数据</h1>
+          <h1>信仰充值入手PS4 slim主机</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/8/29</span>
+          <span class="date">2018/3/27</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Tech.html'>Tech</a></span>
+              <span class="posted-in"><a href='Review.html'>Review</a></span>
            
          
           <span class="comments">
@@ -126,64 +126,64 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>最近P2P行业问题不断，基本每天都有问题平台爆出，为了能够实时跟进相应的平台数据进行汇总，于是就想到了使用爬虫进行相关数据的爬取。经常在网贷天眼网站上了解互金行业的相关新闻内容，虽然网贷天眼也提供了相应的问题平台数据查看，但是也想自己留存一份相应的数据，方便以后研究。</p>
+      <p>在去年双十一的时候，京东上的PS4价格一度神价格，那个时候我的索饭朋友天天给我发优惠信息，结果我一个犹豫错过了最佳的入手时机。在后来怪物猎人世界测试的时候，朋友再次怂恿我入教，我一直都忍住了一直说没有合适的价格，就在怪猎快要发布的那段时间，最终抵挡不住诱惑，以一个比较合适的价格从天猫上购入了一台PS4，从此开始了我信仰之旅。</p>
 
 <span id="more"></span><!-- more -->
 
-<blockquote>
-<p>网贷天眼问题平台数据页面<br/>
-<a href="https://www.p2peye.com/shuju/wtpt/">https://www.p2peye.com/shuju/wtpt/</a></p>
-</blockquote>
+<p>以前玩过PS3，但是在收到PS4的时候还是有点惊喜，没想到盒子会这么小。</p>
 
-<p>通过chrome的开发工具找到数据的接口地址<code>https://www.p2peye.com/platformData.php?mod=issue&amp;ajax=1&amp;action=getPage&amp;page=*</code>，接口返回的数据格式是类似json的格式。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-001.jpg" alt="PS4-001"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-002.jpg" alt="PS4-002"/></p>
 
-<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/15355256885782.jpg" alt=""/></p>
+<p>拆开盒子，机器比我想象中还要小巧一些，配件什么的都很精简电源、hdmi、usb充电线啥的。白色机器外观效果还是挺不错的，磨砂质感的外壳，机器底部的垫脚都是方框三角按键图形。</p>
 
-<p>json格式的数据可以通过网上的相关工具进行csv格式的转换，目前的任务就是需要将该数据保存下来即可。初步的思路如下，接口数据是分页的，每次请求回来的数据是json格式，将抓取回来的json数据转换为csv，再使用excel处理。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-003.jpg" alt="PS4-003"/></p>
 
-<h3 id="toc_0">爬取工具</h3>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-004.jpg" alt="PS4-004"/></p>
 
-<ul>
-<li>Requests库</li>
-<li>Lazyspider库</li>
-</ul>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-005.jpg" alt="PS4-005"/></p>
 
-<p>之前学过一些Python的基础，刚好苦于没有实际案例可以进行练手，这次抓取工作就使用Python爬虫进行爬取。第一次上手爬取数据，数据抓取使用<code>requests</code>库，对比了各种爬虫库工具，感觉这个上手简单一些。数据接口做了一定的处理需要构建一个正常的请求头和cookies。直接使用本机上的cookies，为了方便构建headers和cookies使用<code>Lazyspider</code>库。</p>
+<p>机器正面的黑条部分是光驱入口和两个前置的USB接口，散热口则也隐藏在两侧的黑条内，整个外观比较精简。</p>
 
-<h3 id="toc_1">爬取过程</h3>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-008.jpg" alt="PS4-008"/><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-009.jpg" alt="PS4-009"/></p>
 
-<p><code>Lazyspider</code>库的使用比较简单，直接通过本机的<code>curl</code>解析出需要的headrs和cookies。</p>
+<p>机器的背面是各种插口，电源接口、AUX口、HDMI和网线接口。侧面则有一个专门安装支架底座的接口。</p>
 
-<pre class="line-numbers"><code class="language-python">curl=“……”
-lh=LazyHeaders(curl)
-headers=lh.getHeaders()
-cookies=lh.getCookies()
-</code></pre>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-006.jpg" alt="PS4-006"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-011.jpg" alt="PS4-011"/></p>
 
-<p>接下来就是构建爬取地址，原数据接口是分页发送数据的，开始的想法是将每一页的数据都保存下来，尝试了一下，虽然这样的方式比较简单，但是在后续数据处理的时候文件数太多，格式转换比较麻烦，于是准备将数据保存为一个数据文件。每页返回的数据格式如下：</p>
+<p>PS4附带的DS4手柄整体感觉比较轻，大小方面略微有点小，对于用惯了xbox one s手柄的我来说稍微有点不适应。</p>
 
-<pre class="line-numbers"><code class="language-javascript">{&quot;code&quot;:&quot;0&quot;,&quot;data&quot;:[{&quot;domain_body&quot;:&quot;51lqb&quot;,&quot;operating_state&quot;:&quot;0&quot;,&quot;id&quot;:&quot;5626&quot;,&quot;province_id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;\u96f6\u94b1\u5305&quot;,&quot;black_time&quot;:&quot;2018-08-27&quot;,&quot;is_black&quot;:&quot;2&quot;,&quot;city_name&quot;:&quot;\u5317\u4eac\u5e02\u6d77\u6dc0\u533a&quot;,&quot;black_involve_money&quot;:&quot;&quot;,&quot;black_involve_people&quot;:&quot;&quot;,&quot;black_type&quot;:&quot;10&quot;,&quot;black_url&quot;:&quot;https:\/\/www.p2peye.com\/thread-2132214-1-1.html&quot;,&quot;online_time&quot;:&quot;2015-02-02&quot;,&quot;black_type_name&quot;:&quot;\u5e73\u53f0\u6e05\u76d8&quot;},……]}
-</code></pre>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-012.jpg" alt="PS4-012"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-014.jpg" alt="PS4-014"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-013.jpg" alt="PS4-013"/></p>
 
-<p>实际只需要<code>data</code>的值，刚好这个值是一个list，刚好比较方便多页数据的拼接。测试了一下网站的数据量，大概有200多页左右，每页数据20条。因为不需要太早的数据，就暂定抓了50页的数据，接下来就是构建抓取地址。</p>
+<p>两个手柄一对比就能看出，x1s的手柄会大一圈，整体的重量也会重一点。手感方面各有有点，不过我比较喜欢x1s的摇杆布局，肩键和扳机键的手感会比DS4手柄舒服一点。</p>
 
-<pre class="line-numbers"><code class="language-python">#接口地址
-url=&#39;https://www.p2peye.com/platformData.php?mod=issue&amp;ajax=1&amp;action=getPage&amp;page=&#39;
-#拼接请求地址
-get_url=&#39;&#39;
-for page in range(50):
-    page=page+1
-    get_url=url+str(page)
-    r=requests.post(get_url,headers=headers,cookies=cookies)
-</code></pre>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-017%25201.jpg" alt="PS4-017 1"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-015.jpg" alt="PS4-015"/></p>
 
-<p>接下的操作就简单一些了，把抓取回来的数据提取出<code>data</code>的值放入一个list中，然后保存为一个txt文件就可以了，为了方便观察进度和记录，把文件名按照抓取时间和页数进行设置。</p>
+<p>机器拆完安装到位之后，就开始在淘宝上找账号备份的商家了，事先和朋友商量了，我的机器到位了准备两边互相登录账号弄主机认证，这样可以互相玩账号里的游戏或者合买游戏。</p>
 
-<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/15355281966535.jpg" alt=""/></p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-020.jpg" alt="PS4-020"/></p>
 
-<p>最后将获得的数据通过一些在线转换工具转换为csv就可以通过Excel来进行处理了。高级点的操作就是把抓取回来的数据保存到自己的数据库，然后通过echart等可视化工具进行处理，这部分还需要再研究一下。</p>
+<p>第一次弄的时候没弄明白，只备份了我自己的账号，导致不能认证朋友的账号，又花钱找卖家同时备份了我自己的账号和朋友的账号，然后用这备份了两个账号的文件分别恢复到各自的主机上，我的机器认证朋友的账号，朋友的机器认证我的账号。平时玩的时候只需要登录自己的账号即可，需要下载对方账号里的游戏时切换一下账号即可。</p>
 
-<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/15355285179639.jpg" alt=""/></p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-018.jpg" alt="PS4-018"/></p>
+
+<p>由于机器放置在客厅里，当时装修的时候电视机位置只想到了机顶盒的网口，没想到自己会入主机，所以缺少一个接口，就只能使用无线连接。通过机器自带的网络检测了下网络，还不错至少是nat2类型，下载速度也可以。</p>
+
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-019.jpg" alt="PS4-019"/></p>
+
+<p>打开PSN速度还行，偶尔会有点抽风，同时这样双机认证了之后，只需要一个账号有PS+会员即可，两边都能网络联机，相当于是省了一半的钱，所以双机认证最好找熟悉的朋友来弄。</p>
+
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-023.jpg" alt="PS4-023"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-021.jpg" alt="PS4-021"/></p>
+
+<p>最后机器到手没多久怪猎世界就解禁了，就开始了漫长的狩猎，以至于这篇晒单拖到了现在。</p>
+
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-022.jpg" alt="PS4-022"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/PS4-024.jpg" alt="PS4-024"/></p>
 
 
     
@@ -194,16 +194,16 @@ for page in range(50):
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15386875630765.html" 
-          title="Previous Post: 吃鸡黑科技装备——飞智黄蜂单手游戏手柄助你吃鸡神操作">&laquo; 吃鸡黑科技装备——飞智黄蜂单手游戏手柄助你吃鸡神操作</a>
+          <a href="15312770578474.html" 
+          title="Previous Post: 能以手环价格买到的GPS运动手表——埃微P1一周体验">&laquo; 能以手环价格买到的GPS运动手表——埃微P1一周体验</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15312770578474.html" 
-          title="Next Post: 能以手环价格买到的GPS运动手表——埃微P1一周体验">能以手环价格买到的GPS运动手表——埃微P1一周体验 &raquo;</a>
+          <a  href="15026421285568.html" 
+          title="Next Post: 小牛N1复活记——如何彻底修复00错误">小牛N1复活记——如何彻底修复00错误 &raquo;</a>
       
       </p>
         </div>
