@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  爬取网贷天眼的P2P问题平台数据 - Lamb_Yang羊圈
+  Review - Lamb_Yang羊圈
   
   </title>
   
@@ -101,131 +101,65 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>爬取网贷天眼的P2P问题平台数据</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2018/8/29</span>
-
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='Tech.html'>Tech</a></span>
-           
-         
-          <span class="comments">
-            
-
-            
-          </span>
-
-        </div>
-      </div><!-- article -->
-
-      <div class="article-content">
-      <p>最近P2P行业问题不断，基本每天都有问题平台爆出，为了能够实时跟进相应的平台数据进行汇总，于是就想到了使用爬虫进行相关数据的爬取。经常在网贷天眼网站上了解互金行业的相关新闻内容，虽然网贷天眼也提供了相应的问题平台数据查看，但是也想自己留存一份相应的数据，方便以后研究。</p>
-
-<span id="more"></span><!-- more -->
-
-<blockquote>
-<p>网贷天眼问题平台数据页面<br/>
-<a href="https://www.p2peye.com/shuju/wtpt/">https://www.p2peye.com/shuju/wtpt/</a></p>
-</blockquote>
-
-<p>通过chrome的开发工具找到数据的接口地址<code>https://www.p2peye.com/platformData.php?mod=issue&amp;ajax=1&amp;action=getPage&amp;page=*</code>，接口返回的数据格式是类似json的格式。</p>
-
-<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/15355256885782.jpg" alt=""/></p>
-
-<p>json格式的数据可以通过网上的相关工具进行csv格式的转换，目前的任务就是需要将该数据保存下来即可。初步的思路如下，接口数据是分页的，每次请求回来的数据是json格式，将抓取回来的json数据转换为csv，再使用excel处理。</p>
-
-<h3 id="toc_0">爬取工具</h3>
-
-<ul>
-<li>Requests库</li>
-<li>Lazyspider库</li>
-</ul>
-
-<p>之前学过一些Python的基础，刚好苦于没有实际案例可以进行练手，这次抓取工作就使用Python爬虫进行爬取。第一次上手爬取数据，数据抓取使用<code>requests</code>库，对比了各种爬虫库工具，感觉这个上手简单一些。数据接口做了一定的处理需要构建一个正常的请求头和cookies。直接使用本机上的cookies，为了方便构建headers和cookies使用<code>Lazyspider</code>库。</p>
-
-<h3 id="toc_1">爬取过程</h3>
-
-<p><code>Lazyspider</code>库的使用比较简单，直接通过本机的<code>curl</code>解析出需要的headrs和cookies。</p>
-
-<pre class="line-numbers"><code class="language-python">curl=“……”
-lh=LazyHeaders(curl)
-headers=lh.getHeaders()
-cookies=lh.getCookies()
-</code></pre>
-
-<p>接下来就是构建爬取地址，原数据接口是分页发送数据的，开始的想法是将每一页的数据都保存下来，尝试了一下，虽然这样的方式比较简单，但是在后续数据处理的时候文件数太多，格式转换比较麻烦，于是准备将数据保存为一个数据文件。每页返回的数据格式如下：</p>
-
-<pre class="line-numbers"><code class="language-javascript">{&quot;code&quot;:&quot;0&quot;,&quot;data&quot;:[{&quot;domain_body&quot;:&quot;51lqb&quot;,&quot;operating_state&quot;:&quot;0&quot;,&quot;id&quot;:&quot;5626&quot;,&quot;province_id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;\u96f6\u94b1\u5305&quot;,&quot;black_time&quot;:&quot;2018-08-27&quot;,&quot;is_black&quot;:&quot;2&quot;,&quot;city_name&quot;:&quot;\u5317\u4eac\u5e02\u6d77\u6dc0\u533a&quot;,&quot;black_involve_money&quot;:&quot;&quot;,&quot;black_involve_people&quot;:&quot;&quot;,&quot;black_type&quot;:&quot;10&quot;,&quot;black_url&quot;:&quot;https:\/\/www.p2peye.com\/thread-2132214-1-1.html&quot;,&quot;online_time&quot;:&quot;2015-02-02&quot;,&quot;black_type_name&quot;:&quot;\u5e73\u53f0\u6e05\u76d8&quot;},……]}
-</code></pre>
-
-<p>实际只需要<code>data</code>的值，刚好这个值是一个list，刚好比较方便多页数据的拼接。测试了一下网站的数据量，大概有200多页左右，每页数据20条。因为不需要太早的数据，就暂定抓了50页的数据，接下来就是构建抓取地址。</p>
-
-<pre class="line-numbers"><code class="language-python">#接口地址
-url=&#39;https://www.p2peye.com/platformData.php?mod=issue&amp;ajax=1&amp;action=getPage&amp;page=&#39;
-#拼接请求地址
-get_url=&#39;&#39;
-for page in range(50):
-    page=page+1
-    get_url=url+str(page)
-    r=requests.post(get_url,headers=headers,cookies=cookies)
-</code></pre>
-
-<p>接下的操作就简单一些了，把抓取回来的数据提取出<code>data</code>的值放入一个list中，然后保存为一个txt文件就可以了，为了方便观察进度和记录，把文件名按照抓取时间和页数进行设置。</p>
-
-<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/15355281966535.jpg" alt=""/></p>
-
-<p>最后将获得的数据通过一些在线转换工具转换为csv就可以通过Excel来进行处理了。高级点的操作就是把抓取回来的数据保存到自己的数据库，然后通过echart等可视化工具进行处理，这部分还需要再研究一下。</p>
-
-<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/blog/15355285179639.jpg" alt=""/></p>
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="14584582003384.html">
+                
+                  <h1>Moov Now的使用评测</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>非常感谢极果这次能够给我这次试用moov now的机会。在申请moov now之前特地去他们网站看了下简介，还搜了几篇国外的评测来初步了解了下它的功能。发现moov now这款手环具备的功能还是挺全面的，除了拥有日常活动检测的基础手环功能外，它还支持了跑步、骑行、游泳、室内有氧运动。最为重要的是，官网说他们还可以在运动中对使用者进行运动指导，正是因为这点吸引了我来试用。</p>
 
 
-    
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="14584582003384.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/3/20</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Review.html'>Review</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="15386875630765.html" 
-          title="Previous Post: 吃鸡黑科技装备——飞智黄蜂单手游戏手柄助你吃鸡神操作">&laquo; 吃鸡黑科技装备——飞智黄蜂单手游戏手柄助你吃鸡神操作</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="15312770578474.html" 
-          title="Next Post: 能以手环价格买到的GPS运动手表——埃微P1一周体验">能以手环价格买到的GPS运动手表——埃微P1一周体验 &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
 
 
-
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   <a href="Review_3.html">&laquo; Prev Page</a>  
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
