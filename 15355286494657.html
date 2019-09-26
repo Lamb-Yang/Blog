@@ -158,7 +158,7 @@
 
 <p><code>Lazyspider</code>库的使用比较简单，直接通过本机的<code>curl</code>解析出需要的headrs和cookies。</p>
 
-<pre><code class="language-python">curl=“……”
+<pre class="line-numbers"><code class="language-python">curl=“……”
 lh=LazyHeaders(curl)
 headers=lh.getHeaders()
 cookies=lh.getCookies()
@@ -166,12 +166,12 @@ cookies=lh.getCookies()
 
 <p>接下来就是构建爬取地址，原数据接口是分页发送数据的，开始的想法是将每一页的数据都保存下来，尝试了一下，虽然这样的方式比较简单，但是在后续数据处理的时候文件数太多，格式转换比较麻烦，于是准备将数据保存为一个数据文件。每页返回的数据格式如下：</p>
 
-<pre><code class="language-javascript">{&quot;code&quot;:&quot;0&quot;,&quot;data&quot;:[{&quot;domain_body&quot;:&quot;51lqb&quot;,&quot;operating_state&quot;:&quot;0&quot;,&quot;id&quot;:&quot;5626&quot;,&quot;province_id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;\u96f6\u94b1\u5305&quot;,&quot;black_time&quot;:&quot;2018-08-27&quot;,&quot;is_black&quot;:&quot;2&quot;,&quot;city_name&quot;:&quot;\u5317\u4eac\u5e02\u6d77\u6dc0\u533a&quot;,&quot;black_involve_money&quot;:&quot;&quot;,&quot;black_involve_people&quot;:&quot;&quot;,&quot;black_type&quot;:&quot;10&quot;,&quot;black_url&quot;:&quot;https:\/\/www.p2peye.com\/thread-2132214-1-1.html&quot;,&quot;online_time&quot;:&quot;2015-02-02&quot;,&quot;black_type_name&quot;:&quot;\u5e73\u53f0\u6e05\u76d8&quot;},……]}
+<pre class="line-numbers"><code class="language-javascript">{&quot;code&quot;:&quot;0&quot;,&quot;data&quot;:[{&quot;domain_body&quot;:&quot;51lqb&quot;,&quot;operating_state&quot;:&quot;0&quot;,&quot;id&quot;:&quot;5626&quot;,&quot;province_id&quot;:&quot;1&quot;,&quot;name&quot;:&quot;\u96f6\u94b1\u5305&quot;,&quot;black_time&quot;:&quot;2018-08-27&quot;,&quot;is_black&quot;:&quot;2&quot;,&quot;city_name&quot;:&quot;\u5317\u4eac\u5e02\u6d77\u6dc0\u533a&quot;,&quot;black_involve_money&quot;:&quot;&quot;,&quot;black_involve_people&quot;:&quot;&quot;,&quot;black_type&quot;:&quot;10&quot;,&quot;black_url&quot;:&quot;https:\/\/www.p2peye.com\/thread-2132214-1-1.html&quot;,&quot;online_time&quot;:&quot;2015-02-02&quot;,&quot;black_type_name&quot;:&quot;\u5e73\u53f0\u6e05\u76d8&quot;},……]}
 </code></pre>
 
 <p>实际只需要<code>data</code>的值，刚好这个值是一个list，刚好比较方便多页数据的拼接。测试了一下网站的数据量，大概有200多页左右，每页数据20条。因为不需要太早的数据，就暂定抓了50页的数据，接下来就是构建抓取地址。</p>
 
-<pre><code class="language-python">#接口地址
+<pre class="line-numbers"><code class="language-python">#接口地址
 url=&#39;https://www.p2peye.com/platformData.php?mod=issue&amp;ajax=1&amp;action=getPage&amp;page=&#39;
 #拼接请求地址
 get_url=&#39;&#39;
@@ -282,6 +282,12 @@ for page in range(50):
 	      
 		      
 			      <li class="post">
+			        <a href="15694949766213.html">夏日开车屁屁救星——网易严选通风坐垫</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15662636560999.html">上车2019款MacBook Pro从此转换器不离身</a>
 			      </li>
 		     
@@ -301,12 +307,6 @@ for page in range(50):
 		      
 			      <li class="post">
 			        <a href="15602660590184.html">618促销开始收货——61儿童节的礼物iPhone XR简单一晒</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15594638124358.html">保护腰颈椎办公减压装备——乐歌M1s升降桌</a>
 			      </li>
 		     
 		  
