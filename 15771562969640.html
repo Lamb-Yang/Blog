@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  折腾鼠须管输入法 - Lamb_Yang羊圈
+  5年换机升级——双十二装机记AMD YES - Lamb_Yang羊圈
   
   </title>
   
@@ -110,14 +110,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>折腾鼠须管输入法</h1>
+          <h1>5年换机升级——双十二装机记AMD YES</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/11/1</span>
+          <span class="date">2019/12/24</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Tech.html'>Tech</a></span>
+              <span class="posted-in"><a href='Review.html'>Review</a></span>
            
          
           <span class="comments">
@@ -130,67 +130,76 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>最近尝试了一下很多人比较推荐的鼠须管输入法，事先也知道了这款输入法需要使用者自行进行调教后才好用。刚好在github上看到了一个鼠须管的配置包，于是就来试着折腾一下了。</p>
+      <p>5年前装了一台当时最火热i5 4570配置的电脑，勤勤恳恳服务了这么多年了，中间还升级了1070的显卡，用到现在就性能方面来说还是比较够用的，平时玩游戏啥的基本也能有个不错的画质。但是现如今AMD CPU的崛起，牙膏厂还在挤牙膏的情况下，感觉差不多也可以换换电脑了重新回到高中时代时用过的农企阵营里。</p>
 
 <span id="more"></span><!-- more -->
 
-<pre class="line-numbers"><code class="language-text">配置参考链接：
-https://github.com/wongdean/rime-settings
-</code></pre>
+<p>这次全新升级装机找之前已经升级装机过的朋友讨教了一下时下比较热门的装机配置，然后自己再拼拼凑凑了一下，配置单如下。</p>
 
-<p>首先常规的安装好输入法，将这个配置包的文件下载下来直接丢到鼠须管的用户配置文件夹里，然后<code>重新部署</code>一次就可以了。但是这个配置是偏向双拼方案的，所以需要按照自己的全拼方案调整一下。在<code>~/Rime/</code>文件夹里新建一个<code>luna_pinyin_simp.custom.yaml</code>的文件，偷懒一点直接把配置包里调整好的双拼配置复制进去修改即可。</p>
+<ul>
+<li>  CPU：AMD 3500X</li>
+<li>  主板：微星B450迫击炮钛金版</li>
+<li>  散热：玄冰400</li>
+<li>  内存：科赋8G*2 3200</li>
+<li>  SSD：东芝RC500 512GB+海康威视 C2000pro 1TB</li>
+<li>  机箱：先马平头哥M1</li>
+<li>  电源：酷冷GX550</li>
+<li>  机箱风扇：采融 PT12025 V3 青春版</li>
+</ul>
 
-<pre class="line-numbers"><code class="language-text">patch:
-  schema/dependencies: {}
-  schema/name: 明月简拼 
-  switches:
-    - name: ascii_mode
-      reset: 0
-      states: [ 中文, 西文 ]
-    - name: emoji_suggestion
-      reset: 1
-      states: [ &quot;Yes&quot;, &quot;No&quot; ]
-...
-</code></pre>
+<p>这个配置单平衡了一下价格和售后服务，大部分都是京东购买，刚好双十二期间也有不少优惠。CPU主板套装开始选的是迫击炮普通版的，结果后来发现钛金版的促销了就贵了100多点就干脆换了。两个M2的SSD盘都是淘宝旗舰店买的，东芝还送了系统安装U盘和散热马甲。机器的显卡则是旧电脑上的1070，整套配置下来预算在3600多，还算是不错的价格吧。</p>
 
-<p>这样就可以直接使用这个包里配置好的词库和emoji表情了。剩下的就是输入法的配色外观了，自己一直在用macOS自带的输入法，比较喜欢这个输入法的皮肤配色。而且这次折腾的大头就是在折腾输入法的皮肤配色问题。这套配置里默认的皮肤风格叫<code>apathy</code>配色样式也挺不错的，修改配色需要在<code>squirrel.custom.yaml</code>文件里设置，设置的输入法版本为0.14.0。<br/>
-<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-11-01/15726163542633.jpg" alt="" style="width:364px;"/><br/>
-但是个人比较喜欢macOS系统默认的输入法样式，刚好鼠须管附带一个<code>Mojave Dark</code>的样式比较类似系统类似的样式，通过查找了一些资料了解了一下鼠须管输入法配色的配置方法。最后自行配置了一套比较接近macOS自带输入法的配色样式。</p>
+<p>经过几天的等待最后终于全部到货了，来个全家福。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer016.jpg" alt="newcomputer-016"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer017.jpg" alt="newcomputer-017"/></p>
 
-<pre class="line-numbers"><code class="language-text">lamb:
-      author: &quot;lamb&quot;
-      name: &quot;lamb&quot;
-      back_color: 0xffffff              #设置输入条的背景色，色值是按照BGR的形式16进制填写
-      corner_radius: 5                  #设置输入条的圆角效果
-      border_height: 6                  #设置输入条上下宽度
-      dborder_width: 6                  #设置输入条左右宽度
-      border_color: 0x9f62e8            #输入条边框颜色，似乎在横向模式下不起作用
-      border_color_width: 0             #输入条边框宽度
+<p>机箱选择先马平头哥主要是图个便宜实惠吧，而且又是我比较喜欢的宽体矮箱。机箱的开关在顶部，前置的USB3.0接口只有1个。机箱背板的空间还算好，走背线空间比较足。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer018.jpg" alt="newcomputer-018"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer019.jpg" alt="newcomputer-019"/></p>
 
-      candidate_format: &quot;%c %@  &quot;       #设置每个候选词之间的间隔距离，%c代表备选的数字，%@代表候选字，可以通过输入空格的形式来调整每个候选字之间的间隔距离
-      candidate_text_color: 0x333333    #候选字颜色
-      # comment_text_color: 0x808080    #提示文字颜色，全拼模式下貌似不显示
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer020.jpg" alt="newcomputer-020"/></p>
 
-      font_face: PingFangSC             #字体
-      font_point: 16                    #字体大小
-      text_color: 0x333333              #普通候选字的颜色，非第一候选字
-      hilited_candidate_label_color: 0xffffff   #第一候选字标签颜色，也就是数字1
-      hilited_text_color: 0xffffff              #第一候选字颜色
-      hilited_candidate_back_color: 0x8448c9    #第一候选字高亮颜色
-      hilited_corner_radius: 5                  #第一候选字高亮颜色的圆角，当不设置时就是一整块的颜色，设置了圆角之后就带有圆角效果了
+<p>许久不装机，都忘记了装机的步骤了，先把板U一套先安装好。钛金版的白色主板和白色装甲还是好看，可惜装入机箱后就看不到了。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer023.jpg" alt="newcomputer-023"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer024.jpg" alt="newcomputer-024"/></p>
 
-      horizontal: true                  #设置水平还是竖直模式
-      inline_preedit: true              #设置是否双行显示
+<p>CPU是3500X，自带的风扇据说是个直升机，而且还没有RGB。散热器直接就上玄冰400了，便宜大碗，就是安装有点反人类。</p>
 
-      label_color: 0x888888             #普通标签的颜色(非第一候选字)，也就是候选字数字
-      label_font_point: 12              #普通标签的字体大小
-</code></pre>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer025.jpg" alt="newcomputer-025"/><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer026.jpg" alt="newcomputer-026"/></p>
 
-<p>按照以上配置最后的效果就是这样。<br/>
-<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-11-01/15726196138669.jpg" alt="" style="width:426px;"/><br/>
-对比一下自带的输入法效果，还是比较接近了。<br/>
-<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-11-01/15726196729619.jpg" alt="" style="width:411px;"/><br/>
-只要掌握这个设置方法后，就能自己自定义更多更适合自己的配色方案了。</p>
+<p>内存方面朋友推荐了科赋，性能价格也还合适。内存条造型也算是好看，好看就有好性能。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer027.jpg" alt="newcomputer-027"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer029.jpg" alt="newcomputer-029"/></p>
+
+<p>M2 SSD一次性买了两条，一个安装系统和软件，一个用来放游戏、资料等。最近海康威视的c2000pro比较热门而且速度不错，适合用来放游戏这类大文件。虽然朋友说他测试了和普通SATA口子的SSD盘，在加载游戏方面的差别基本是感知不到的。但是主板空着个M2的槽子也不太好，还是两个插槽都插满。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer021.jpg" alt="newcomputer-021"/></p>
+
+<p>之前电脑的固态硬盘都是那种2.5寸的，这次装机第一次用上M2接口的SSD盘，真心觉得迷你，生怕一不小心折断了。</p>
+
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer030.jpg" alt="newcomputer-030"/></p>
+
+<p>东芝旗舰店双十二促销的时候附送了散热马甲和装机U盘，结果我这个散热马甲里漏发了散热硅胶片，幸好我自己之前有买多的硅胶片存货。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer031.jpg" alt="newcomputer-031"/></p>
+
+<p>托了玄冰400的福，安装过程还是挺繁琐的，而且和之前电脑用的玄冰400安装方式还不同，新版的玄冰400采用了直接螺丝拧的方式固定，生怕把CPU顶爆了。主板的两个M2接口靠近CPU的速度快安装了海康威视的c2000pro，另一个插槽装了RC500，系统盘不怎么吃速度就委屈了。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer034.jpg" alt="newcomputer-034"/></p>
+
+<p>最后就是把这些大件往机箱里塞就行了，显卡还是旧机的索泰1070，电源是酷冷GX550，机箱风扇是三个采融 PT12025 V3 青春版。配件安装到位之后，就是漫长的插线、走线、理线过程了。<br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer015.jpg" alt="newcomputer-015"/></p>
+
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer022.jpg" alt="newcomputer-022"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer033.jpg" alt="newcomputer-033"/></p>
+
+<p>最后装机完毕，个人认为理线效果还算不错，后面就可以开机装系统跑测试了。</p>
+
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer035.jpg" alt="newcomputer-035"/><br/>
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2019-12-24/newcomputer036.jpg" alt="newcomputer-036"/></p>
+
+<p>先装了个娱乐大师跑了跑分，吃鸡主机确认击败全国99%的用户。</p>
+
+<p>给两块SSD跑了下速度测试，把旧电脑上的游戏库文件复制到c2000pro之后才想起做测试，这个时候差不多已经容量过半了，就当测试半容存储的时候速度吧。测试结果基本和宣传的标称差不。</p>
+
+<p>这次装机之后，差不多又可以用上好几年了。</p>
 
 
     
@@ -201,16 +210,13 @@ https://github.com/wongdean/rime-settings
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15752752100755.html" 
-          title="Previous Post: 真香的追觅无线吸尘器V10">&laquo; 真香的追觅无线吸尘器V10</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15721582525027.html" 
-          title="Next Post: 用上了就真香的无线降噪耳机——OPPO Enco Q1使用体验">用上了就真香的无线降噪耳机——OPPO Enco Q1使用体验 &raquo;</a>
+          <a  href="15761298218359.html" 
+          title="Next Post: 双十二提前上车PDD——iPhone11有点香哦">双十二提前上车PDD——iPhone11有点香哦 &raquo;</a>
       
       </p>
         </div>
