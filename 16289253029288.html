@@ -128,12 +128,12 @@
       <div class="article-content">
       <p>早在19年的时候赶上当时的矿渣末班车入手了一台蜗牛星际，到手就自带了一个黑群晖。刚开始的时候自己也不懂怎么玩转这个设备，就只单纯当作了一个放在家里的网盘用来保存点视频资源内网播放。到目前为止这台蜗牛星际才慢慢被我打造成一台工作生活上的小帮手。目前用这台NAS实现了笔记文档管理、知识库、手机照片备份、视频观看、照片管理等功能，基本覆盖了工作、生活、娱乐几个方面，而且所有服务都可以外网访问。</p>
 <span id="more"></span><!-- more -->
-<h2><a id="%E7%AC%94%E8%AE%B0%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9" class="anchor" aria-hidden="true" href="#%E7%AC%94%E8%AE%B0%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9"><span class="octicon octicon-link"></span></a>笔记工具选择</h2>
+<h2><a id="%E7%AC%94%E8%AE%B0%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>笔记工具选择</h2>
 <p>自己曾经也是一名印象笔记用户，还充值续费了好几年。但是印象笔记后来广告越来越多，会员服务越来越拉垮，一怒之下放弃了剩下的几年会员换其他笔记工具。当时正值各种文档工具爆发，各种新型笔记工具风起云涌，自己也尝试使用过很多笔记工具例如notion、obsidian、Remnote、思源笔记等，这些工具都有一些不太满足的地方，最后选择了自建docker版的为知笔记和trilium note来作为笔记工具和知识库工具。选择这两个工具一来是数据可以私有化笔记数据自行保管；二是这两个工具都是富文本工具文档图片维护方便；三是跨平台可用，为知笔记有app有桌面程序网页版，trilium有桌面版和网页版。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284932710832.jpg" alt="" /></p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284933453803.jpg" alt="" /></p>
 <p>为知笔记主要用来当作日常笔记本，记录一些工作、生活方面的记录、待办事项等零散型内容。刚好为知笔记有app有桌面端，使用上就非常方便。对于那种成块的知识内容、经验总结型的内容，我就会使用trilium note来进行记录，它有无限层级的笔记目录，每个笔记都能当作文件夹，笔记都能做内部wiki链接关系图。虽然trilium note也自带有日记、待办功能，但是个人感觉用起来不是很顺手，所以还是只把trilium note当作一个知识库工具来使用，只需要有桌面端就可以了。</p>
-<h2><a id="%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true" href="#%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8"><span class="octicon octicon-link"></span></a>安装使用</h2>
+<h2><a id="%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装使用</h2>
 <p>两个笔记工具都有官方的docker镜像，可以直接在群晖的docker工具里直接搜索下载安装即可。官方版的镜像都是截图中的第一个，可能会有一些第三方的修改版，需要慎重使用。Trilium note有一个个人汉化版的桌面端和镜像，有需要的可以自己取用。为知笔记的桌面端和app都是可以直接使用官网或者应用市场里的官方版本的。</p>
 <p>原版<br />
 <a href="https://github.com/zadam/trilium">https://github.com/zadam/trilium</a><br />
@@ -141,14 +141,14 @@
 <a href="https://github.com/Nriver/trilium-translation">https://github.com/Nriver/trilium-translation</a></p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284945072219.jpg" alt="" /><br />
 <img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284945595051.jpg" alt="" /></p>
-<h3><a id="%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0" class="anchor" aria-hidden="true" href="#%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0"><span class="octicon octicon-link"></span></a>为知笔记</h3>
+<h3><a id="%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>为知笔记</h3>
 <p>群晖的docker工具使用起来还是比较简单的，在下载好的镜像页面直接双击创建容器。docker容器的数据需要自行进行配置一个外部保存文件夹来私有化数据，为知笔记在创建容器时的装载路径为/wiz/storage。容器的端口为80，外部端口可以配置成自己需要的端口号。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284948489536.jpg" alt="" /></p>
 <p>保存好之后就启动了，第一次启动可能有点慢。只要容器成功启动后，就可以通过nas的内网ip地址和容器的端口号打开网页版为知笔记了。默认的默认管理员账号<a href="mailto:admin@wiz.cn">admin@wiz.cn</a>密码123456。除了管理员账号外，其他用户需要通过这个网页版来注册，默认的免费用户数量为5个。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284967552909.jpg" alt="" /></p>
 <p>为知笔记的客户端是可以配置私有地址的为知笔记服务，以app为例在服务器选择时切换为「私有服务器」即可，服务器地址一栏可以为ip或者后面配置的域名地址，一定要记得带端口号。账号密码地址无误就能在app中使用私有化部署的为知笔记了。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/img6162.jpeg" alt="IMG_6162" /></p>
-<h3><a id="trilium-note" class="anchor" aria-hidden="true" href="#trilium-note"><span class="octicon octicon-link"></span></a>trilium note</h3>
+<h3><a id="trilium-note" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>trilium note</h3>
 <p>镜像的下载和安装方式与为知笔记的类似，但是在创建容器的时候有一点区别。为知笔记在创建时我们挂载了外部的存储路径来将数据私有化，但是在trillium note升级到0.47版之后镜像内部数据的路径变为了<code>/home/node/trilium-data</code>，不能再将这个路径挂载到docker外部存储路径了，否则容器会启动不起来提示权限不足。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16289240749370.jpg" alt="" /></p>
 <p>研究了官方issues中的相关讨论之后自己也还是没搞定。所以这里目前只有两个方式来解决，要么使用0.46版以前的保存路径是<code>/root/trilium-data</code>是可以成功挂载出来，要么就放弃docker的数据私有化，反正这个工具会在每台使用设备上保存相应的本地数据库。直接在桌面版软件的功能菜单中就能查看当前的数据库的保存路径。</p>
@@ -157,12 +157,12 @@
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16289244419114.jpg" alt="" /></p>
 <p>在设置界面的Sync功能里配置相应网络地址即可，点击最底下的测试按钮可以测试下是否能连接上。只有连接上了之后，工具就会自动将笔记数据库做同步。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16289246661869.jpg" alt="" /></p>
-<h2><a id="%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D" class="anchor" aria-hidden="true" href="#%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D"><span class="octicon octicon-link"></span></a>配置域名</h2>
+<h2><a id="%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置域名</h2>
 <p>笔记工具安装好之后除了在家内网使用肯定不可避免在外使用，这个时候就需要给nas配置一个外网访问的功能了。如何给群晖nas配置外网访问有很多方法比如做frp内网穿透、使用向日葵一类的工具或者配置域名。因为家里的电信网络直接就有外网ip，所以配置一个域名是最简单的。自己一直在使用腾讯云的cos，所以域名就直接在腾讯云上买了个便宜的域名，域名购买好之后还需要做一些实名认证之类的工作。在域名解析页面添加一个专门的二级域名来个群晖nas使用。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284974460444.jpg" alt="" /></p>
 <p>在添加二级域名记录时，腾讯云的操作页面上都有相应的说明提示，直接按照提示填写即可。主机记录填写自己想要的二级域名前缀，自己用的nas前缀。记录值填写自己网络的当前的外网ip或者直接0.0.0.0，因为这个外网ip会变动所以后面还需要在群晖nas系统里做一个ddns的配置将nas的外网ip更新过来。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284976024283.jpg" alt="" /></p>
-<h2><a id="%E9%85%8D%E7%BD%AEddns" class="anchor" aria-hidden="true" href="#%E9%85%8D%E7%BD%AEddns"><span class="octicon octicon-link"></span></a>配置ddns</h2>
+<h2><a id="%E9%85%8D%E7%BD%AEddns" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置ddns</h2>
 <p>在群晖nas的控制面板-外部访问-ddns中新增一个记录，服务提供商选择dnspod，主机名就是给nas配置的二级域名，我的是nas.xxx.xxx这样。用户名和密钥需要回到dnspod控制台管理网页进行申请。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284990757012.jpg" alt="" /></p>
 <p>创建域名使用的密钥时可以单独创建一个专用的密钥，在dnspod token页面创建。创建密钥时token是一次性显示所以最好在要用的时候来创建。创建好之后填写到群晖的ddns配置中去即可，显示正常即可。此时还需要在路由器上配置一下对外暴露的端口号。</p>
@@ -173,7 +173,7 @@
 <p>域名配置好之后会发现一个问题，内网中使用域名访问群晖的各种服务会发现使用不了。特别是像手机端app这种需要满足内外网切换使用的情况，app里一般都需要配置成域名的访问形式。这个问题需要在路由器中配置一下自定义的hosts。家里的路由器是小米ax1800，一开始在网页版的配置界面中根本找不到这个功能，后来才在路由器app里找到。小米路由器的固件真的太拉垮了。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/img6161.png" alt="IMG_6161" /></p>
 <p>路由器中配置好hosts之后，就能在内网使用域名进行访问了，这样相应的app就能无缝使用了。</p>
-<h2><a id="%E9%85%8D%E7%BD%AEhttps" class="anchor" aria-hidden="true" href="#%E9%85%8D%E7%BD%AEhttps"><span class="octicon octicon-link"></span></a>配置https</h2>
+<h2><a id="%E9%85%8D%E7%BD%AEhttps" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置https</h2>
 <p>域名配置好之后默认是http的，一般来说不是很安全，群晖里面可以进行配置成https的形式。首先需要给域名申请ssl证书，在腾讯云的域名管理页面打开dnspod网站管理页面，点击相应域名后面的ssl进行证书申请。已经申请过ssl证书的二级域名相应的标志是绿色的，将相应的证书下载到本地。</p>
 <p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-08-14/16284979436529.jpg" alt="" /></p>
 <p>在群晖的控制面板-安全性-证书里面，把下载回来的证书添加进去。需要注意的是一定要相应的域名证书，比如我配置的域名是nas.xxx.xxx证件的域名也要是这个域名的。</p>
@@ -189,6 +189,9 @@
       <div class="row">
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="16374804420397.html" 
+          title="Previous Post: 轻巧便携的备用蓝牙键盘——罗技K380">&laquo; 轻巧便携的备用蓝牙键盘——罗技K380</a>
       
         </p>
         </div>
@@ -273,6 +276,12 @@
 	      
 		      
 			      <li class="post">
+			        <a href="16374804420397.html">轻巧便携的备用蓝牙键盘——罗技K380</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16289253029288.html">穷玩NAS——在蜗牛星际上部署私有笔记工具</a>
 			      </li>
 		     
@@ -292,12 +301,6 @@
 		      
 			      <li class="post">
 			        <a href="16222731130163.html">MacBook Pro M1版轻度体验——续航发热控制确实了得</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="16219552123936.html">为了能在iPhone和MacBook之间自由切换最终还是入手了AirPods Pro</a>
 			      </li>
 		     
 		  
