@@ -1,0 +1,756 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  继续玩NAS——为知笔记docker私有部署升级 - Lamb羊圈日志
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Lamb羊圈日志" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+ 
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="about.html">about</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Lamb羊圈日志</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="about.html">about</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="%E9%85%B7%E4%BA%A7%E5%93%81.html">酷产品</a></li>
+        
+            <li><a href="%E6%8A%80%E6%9C%AF.html">技术</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>继续玩NAS——为知笔记docker私有部署升级</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2021/12/24</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='%E9%85%B7%E4%BA%A7%E5%93%81.html'>酷产品</a></span>
+           
+         
+          <span class="comments">
+            
+              <a href="16403399659624.html#disqus_thread">comments</a>
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p>在上次讲解自己的NAS使用文章中提到了自己部署了一个docker版的为知笔记来使用，其实部署好之后也是偶尔用用，中途还更换尝试了其他笔记工具。就在最近一段时间，为知笔记放出了全新的重构版，使用功能体验上有了很大的升级。在这段时间中使用重构版后决定对部署的笔记服务进行一次安全升级，特别是前段时间遇到有人尝试非法登录我的DMS服务。</p>
+<span id="more"></span><!-- more -->
+<p>自从上次在系统日志里查看到有人尝试登录我的群晖DMS，我就立即将所有DMS服务端口进行了修改，并强制切换成https访问，还调整了群晖系统的安全策略。并且把DMS的默认管理员账号禁用，重新对已有账号密码进行修改成更复杂的密码，开启邮件监控和两部验证。最后就只剩下配置的docker服务还是http协议的，所以就准备在这次为知笔记升级一起升级一下。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403269009557.jpg" alt="" /></p>
+<p>为知笔记推出桌面重构版后，文档的数据结构进行了调整，新文档在旧客户端中不能编辑，所以需要升级相应的docker镜像、桌面程序和移动端APP才能实现全终端统一的使用体验。因为之前已经配置好了为知笔记的docker容器了。更新容器镜像我是通过使用portainer工具来进行无损升级，如果使用群晖自带的docker工具就稍微麻烦点，需要删除容器重下新版的镜像。升级好之后重新进网页版的为知笔记就能看到新版的界面。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403275205343.jpg" alt="" /></p>
+<h3><a id="%E7%BE%A4%E6%99%96%E8%87%AA%E5%B8%A6%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>群晖自带反向代理服务器配置</h3>
+<p>在上一篇文章中已经配置过笔记本容器的外网访问了，不过这个时候还都是默认的http访问，如果对安全性没有这么高的需求，直接在为知笔记软件里使用自己设置的外网地址就能对接到自己docker服务器。对于开启https访问，在为知笔记的官网有详细的部署说明。</p>
+<blockquote>
+<p><a href="https://www.wiz.cn/zh-cn/introduction-docker-nas">https://www.wiz.cn/zh-cn/introduction-docker-nas</a><br />
+<a href="https://www.wiz.cn/zh-cn/docker-https">https://www.wiz.cn/zh-cn/docker-https</a></p>
+</blockquote>
+<p>其实在官网的部署说明中就已经有介绍如何开启服务端的https访问配置，群晖系统自带一个反向代理配置功能。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403283010717.jpg" alt="" /><br />
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403283582358.jpg" alt="" /></p>
+<p>结果我在自己的群晖上进行配置的时候发现，我所使用的群晖系统配置界面和介绍教程中的不一样，没有反向代理配置的自定义配置选项卡。当时也没多想就直接配置了，结果发现倒是可以实现https访问，但是文档却打不开。<br />
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403284926936.jpg" alt="" /></p>
+<p>经过多次设置发现，文档打不开的情况只会出现在使用https协议时，而且桌面客户端不会出现这个问题，只有网页版和手机端会出现。通过网页调试工具发现了问题所在，有一个wss的websocket服务协议连接失败。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403286350072.jpg" alt="" /></p>
+<p>后来查了一下资料发现群晖系统在6.2之前的版本里会有这个bug，在反向代理https时会不能处理wss协议，这也解释了为何官方的介绍里配置界面和我的不一样。这个问题在6.2之后的群晖系统里非常好解决，直接在自定义配置界面里添加一下行了。结果我的群晖系统刚好是6.17，而且我的nas还是黑裙，不敢轻易升级系统。于是只能尝试安装nginx来手动配置了。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403289153569.jpg" alt="" /></p>
+<h3><a id="nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nginx反向代理配置</h3>
+<blockquote>
+<p>Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+</blockquote>
+<p>在群晖的docker工具中可以直接安装nginx，虽然为知笔记官方有介绍如何配置nginx来实现https访问，但是官方那个说明有点过于简约了，只适合对nginx熟悉的人。又是一番资料查找，终于有了个大概了解，参考了几篇比较详细的教程完成了nginx的配置。在创建nginx的docker容器前，需有做好以下准备工作。首先在nas按照以下目录结构创建nginx的配置目录。<br />
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403312869235.jpg" alt="" /></p>
+<p>把自己的域名SSL证书放到<code>conf.d</code>目录下，我这边专门创建了个域名的文件夹来放置。这个证书可以从域名网站下载，如果nas里已经配置过证书了也可以直接导出。导出的证书可能是csr和key的文件，或者是两个pem文件，后续过程中我只使用了pem的证书文件。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403314850266.jpg" alt="" /></p>
+<p>然后再创建两个配置文件<code>nginx.conf</code> <code>default.conf</code>分别放置在<code>nginx</code> <code>conf.d</code>目录下。配置文件的内容分别如下。<br />
+<code>nginx.conf</code>的配置内容，不需要调整直接复制使用即可。</p>
+<pre class="line-numbers"><code class="language-plain_text">user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  2048;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout    65;
+    client_max_body_size 10M;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+</code></pre>
+<p><code>default.conf</code>的配置文件需要针对各自的具体情况来填写，配置文件中以我的系统状态为基础进行的配置，可以先复制创建后，再做修改。</p>
+<pre class="line-numbers"><code class="language-plain_text">#docker进行关联，和下面的proxy_pass对应
+
+upstream web{
+    server wiz:80;
+}
+
+server {
+    listen 80;
+    listen 127.0.0.1;
+    listen [::]:80 default_server ipv6only=on;
+    server_name xx.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    # Enable HTTP/2 反向代理访问的地址，需要在docker页面预先配置
+    listen 10002 ssl http2;
+    listen [::]:10002 ssl http2;
+    server_name xxx.com; #你的域名
+
+#    root /etc/nginx/templates;
+
+    #SSL-START SSL相关配置，请勿删除或修改下一行带注释的404规则
+    #error_page 404/404.html;
+    #SSL-END
+
+    #ERROR-PAGE-START  错误页配置，可以注释、删除或修改
+    #error_page 404 /404.html;
+    #error_page 502 /502.html;
+    #ERROR-PAGE-END
+
+    #REWRITE-START URL重写规则引用,修改后将导致面板设置的伪静态规则失效
+    #REWRITE-END
+
+    #禁止访问的文件或目录
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|LICENSE|README.md)
+    {
+        return 404;
+    }
+
+    #一键申请SSL证书验证目录相关设置
+    location ~ \.well-known{
+        allow all;
+    }
+
+    # 这里为具体的服务代理配置
+    location / {
+
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header x-wiz-real-ip $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Forwarded-Proto &quot;https&quot;; #强制开启https
+        proxy_set_header X-NginX-Proxy true;
+
+        #--解决转https代理后wss协议无法连接的问题
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection upgrade;
+        #proxy_set_header Connection &quot;keep-alive&quot;;
+
+        proxy_set_header Host $http_host;
+        proxy_pass http://172.17.0.2:80;  #使用docker的内部地址，需要在docker配置工具中查看
+        proxy_ssl_session_reuse off;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect off;
+    }
+
+  ssl_certificate           conf.d/xxx.com/cert.pem;
+  ssl_certificate_key       conf.d/xxx.com/privkey.pem;
+
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+  ssl_prefer_server_ciphers on;
+  ssl_session_timeout 10m;
+  ssl_session_cache builtin:1000 shared:SSL:10m;
+  ssl_buffer_size 1400;
+  add_header Strict-Transport-Security max-age=15768000;
+  ssl_stapling on;
+  ssl_stapling_verify on;
+}
+</code></pre>
+<p>下面来对配置参数做具体说明，修改配置文件的同时需有创建nginx的容器，在创建容器时，配置容器的存储空间选项卡，就按前面创建的文件路径来勾选填写。</p>
+<pre class="line-numbers"><code class="language-plain_text">/etc/nginx/nginx.conf
+/var/log/nginx
+/usr/share/nginx/html
+/etc/nginx/conf.d
+</code></pre>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403323503541.jpg" alt="" /></p>
+<p>端口配置页面就设置需要通过外网访问的端口号，我这里设置成了10002端口。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403324601488.jpg" alt="" /></p>
+<p>在链接选项卡中选择已经创建好的为知笔记容器，别名可以写的简单点，配置文件中需要用。<br />
+<img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403325386523.jpg" alt="" /></p>
+<p>容器设置好之后，可以先把容器保存不要启动，启动会报错。接下来就开始修改<code>default.conf</code>配置文件，没有提到的地方就不用修改，因为我自己也不知道为何这么写，反正就是需要。</p>
+<p>在这段配置项中wiz就是设置的为知笔记容器别名，为知笔记容器默认的内部端口是80。</p>
+<pre class="line-numbers"><code class="language-plain_text">#docker进行关联，和下面的proxy_pass对应
+upstream web{
+    server wiz:80;
+}
+</code></pre>
+<p>在创建容器的时候填写了10002端口为外网的访问端口，配置文件里的这部分也需要按容器配置的来，域名替换成自己的域名即可。</p>
+<pre class="line-numbers"><code class="language-plain_text"># Enable HTTP/2 反向代理访问的地址，需要在docker页面预先配置
+   listen 10002 ssl http2;
+   listen [::]:10002 ssl http2;
+   server_name xxx.com;
+</code></pre>
+<p>配置文件中<code>proxy_pass</code>需要配置成为知笔记docker容器的局域网内部地址和端口</p>
+<pre class="line-numbers"><code class="language-plain_text">proxy_pass http://192.168.x.x:1234; #使用docker的内部地址
+</code></pre>
+<p>最后就是配置域名的ssl证书了，这个就按照文件的路径填写即可。</p>
+<pre class="line-numbers"><code class="language-plain_text">ssl_certificate           conf.d/xxx.com/cert.pem;
+ssl_certificate_key       conf.d/xxx.com/privkey.pem;
+</code></pre>
+<p>配置文件保存后启动nginx容器，如果启动成功，现在就能通过<code>https://xxx.com:10002</code>这个地址打开网页版的为知笔记了。通过nginx来进行https的反向代理肯定是比群晖系统自带的功能配置起来麻烦，如果群晖系统比较新的还是建议直接参看官方说明使用系统工具来配置。</p>
+<h3><a id="%E9%87%8D%E6%9E%84%E7%89%88%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>重构版为知笔记功能介绍</h3>
+<p>自己之所以要这么折腾nas就是为了更好地使用新版的为知笔记，这次重构升级之后的为知笔记在功能上已经完全升级换代了。自己也差不多使用了两个多月了，因为目前官方也是在不断更新功能修复bug，但是按目前的完成度来说，已经可以作为日常使用的工具了。在使用重构版为知笔记之前需要注意旧版笔记的兼容问题，在打开旧版笔记时软件提供转换功能转换成新版笔记，但是这个不可逆，但是这个只针对单篇文章操作。如果历史数据过多的用户，慎重操作；如果是像我这样没有历史数据包袱的全新用户，就可以直接使用新版的笔记文件。自己总结了几点自己非常看重的重构版为知笔记特点。</p>
+<ul>
+<li>WYSIWYG所见即所得</li>
+<li>块编辑</li>
+<li>更好的表格工具块</li>
+<li>内置图形化流程图工具块</li>
+<li>双链，支持文章和内容块</li>
+<li>多终端使用，pc、mac、linux、ios、安卓、web</li>
+</ul>
+<blockquote>
+<p>更多功能介绍参考 <a href="https://www.wiz.cn/zh-cn/wiznew.html">https://www.wiz.cn/zh-cn/wiznew.html</a></p>
+</blockquote>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403384783490.jpg" alt="" /></p>
+<p>重构版的为知笔记界面也调整成为现在流行的三栏式，笔记已经只有两种文档格式，MD笔记和大纲笔记。MD笔记转变成所见即所得的编辑模式，这样使用起来也是更方便了。新的工具块里支持快速插入功能模块。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403387244365.jpg" alt="" /></p>
+<p>新版的表格样式更好看，添加行列也更方便，支持单元格合并，还能插入图片。这个表格工具算是我用过的笔记工具第一梯队。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403388257640.jpg" alt="" /></p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403389502208.jpg" alt="" /></p>
+<p>内置的流程图工具算是我的最爱了，再也不用单独使用其他流程图工具画好后再截图贴到笔记里。现在内置了draw.io的流程图工具，嵌入的流程图直接修改编辑就行了，导出pdf也不成问题。而且流程图的自由度特别高，使用也简单，用过draw.io的都知道。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403390903670.jpg" alt="" /></p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403391060891.jpg" alt="" /></p>
+<p>为知笔记最近也更新了双链功能，现在能实现内容块的关联了，具体的双链功能说明参看<a href="https://www.wiz.cn/zh-cn/wiznote-wiki-links.html">官方说明</a>，还提供了一个简单的双链图谱来查看，因为自己一直在使用思源笔记，为知笔记的双链功能还略显简陋还需要再看看后面有没有改善。</p>
+<p><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2021-12-24/16403395195240.jpg" alt="" /></p>
+<p>重构版的新版文档在各个终端里都能查看编辑，但是手机APP里无法编辑流程图，其他内容基本都能进行操作，这个也无关痛痒了。简单介绍了下重构版的为知笔记功能，目前更新的功能还是能满足自己的使用需求的，特别是流程图工具块。另外目前需要吐槽的是把以前最明显的标签功能隐藏得很深，不好给笔记添加标签来进行管理了。</p>
+<blockquote>
+<p>配置nginx的参考文章链接<br />
+官方部署置说明<br />
+<a href="https://www.wiz.cn/zh-cn/introduction-docker-nas">https://www.wiz.cn/zh-cn/introduction-docker-nas</a><br />
+<a href="https://www.wiz.cn/zh-cn/docker-https">https://www.wiz.cn/zh-cn/docker-https</a><br />
+<a href="https://www.swack.cn/wiki/001557409799713ca16fa7271334e4cadbf9cc76fd0d933000/001579792857383eff220c5fdbf4b46a8a74e5f9da4a958000">《群晖docker 使用Nginx反向代理》</a><br />
+<a href="https://note.skiy.net/d/46">《今天折腾了个为知笔记》</a><br />
+400报错解决 <a href="https://developer.aliyun.com/article/569969">https://developer.aliyun.com/article/569969</a><br />
+<a href="https://cloud.tencent.com/developer/article/1552784">WebSocket使用Nginx反向代理解决Wss服务问题</a></p>
+</blockquote>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="16374804420397.html" 
+          title="Next Post: 轻巧便携的备用蓝牙键盘——罗技K380">轻巧便携的备用蓝牙键盘——罗技K380 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+            <div id="disqus_thread"></div>
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://mweb-1257635667.cos.ap-chengdu.myqcloud.com/2020-01-03/bc7a9295a6134cbc956e900124d17480.jpg" /></div>
+            
+                <h1>Lamb羊圈日志</h1>
+                <div class="site-des">一些使用评测，一些瞎研究。</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/Lamb-Yang" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:fbky@outlook.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="%E9%85%B7%E4%BA%A7%E5%93%81.html"><strong>酷产品</strong></a>
+        
+            <a href="%E6%8A%80%E6%9C%AF.html"><strong>技术</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="16403399659624.html">继续玩NAS——为知笔记docker私有部署升级</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16374804420397.html">轻巧便携的备用蓝牙键盘——罗技K380</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16289253029288.html">穷玩NAS——在蜗牛星际上部署私有笔记工具</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16275479587928.html">继扫地机器人之后的又一神器——必胜2225Z洗地机</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16265103453922.html">穷玩富士之四——可玩性超高的广角镜头岩石星10mmF8二代</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'lamgy'; 
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+<script type="text/javascript">
+var disqus_shortname = 'lamgy'; 
+
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+
+
+  </body>
+</html>
